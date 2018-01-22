@@ -10,5 +10,5 @@ axios.interceptors.request.use(function (res){
 //响应拦截
 axios.interceptors.response.use(function (req){
     Toast.hide()
-    return req;
+    return req.data;
 })

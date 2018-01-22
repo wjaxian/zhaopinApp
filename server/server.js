@@ -1,68 +1,13 @@
 const express = require("express");
+const userRoute = require("./userRoute");
 const app = express();
 
-const mongoose = require("mongoose");
-const DB_URL = "mongodb://localhost:27017/testapp";
-mongoose.connect(DB_URL);//链接mongo并且使用testAPP这个数据库（集合）
-//监听mongo是否链接成功
-mongoose.connection.on("connected",function(){
-    console.log("mongodb connect success.")
-});
+// 获取用户信息接口
+app.use("/user",userRoute);
 
-
-//创建一个表（数据模型），JSOn为字段
-const User = mongoose.model("user",new mongoose.Schema({
-    name:{type:String,require:true},
-    age:{type:Number,require:true},
-    sex:{type:String,require:true},
-    work:{type:String,require:true}
-}));
-
-//create 新增数据
-// User.create({
-//     name:"Toney",
-//     age:24,
-//     sex:"man",
-//     work:"Programmer"
-// },function(err,doc){
-//     if(!err) {
-//         console.log(doc)
-//     }else{
-//         console.log(err)
-//     };
+// app.get("/",function(req,res){
+//     res.send("wellcom to express!")
 // });
-
-// remove 删除数据
-// User.remove({name:"Toney"},function(err,doc){
-//     if(!err){
-//         console.log(doc)
-//     }else{
-//         console.log(err)
-//     }
-// });
-
-//update 更新数据
-// User.update({name:"比较叼的一条数据"},{$set:{
-//     name:"小明"
-// }},function (err,doc){
-//     console.log(doc)
-// });
-
-app.get("/",function(req,res){
-    res.send("wellcom to express!")
-});
-
-app.get("/user",function(req,res){
-    //find 查询数据
-    User.findOne({name:"Toney"},function(err,doc){
-        res.json(doc);
-    })
-
-    // findOne 只查询一条数据
-    // User.findOne({name:"Toney"},function(err,doc){
-    //     res.json(doc);
-    // })
-});
 
 app.listen("9093",function(){
     console.log("open Browser http://localhost:9093");
