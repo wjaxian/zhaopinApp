@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 import {
     BrowserRouter,
     Route,
-    Redirect,
+    // Redirect,
     Switch
 } from "react-router-dom";
 import reducers from "./reducer";
@@ -20,6 +20,8 @@ import "./http";
 import Login from "./container/login/login";
 import Register from "./container/register/register";
 import AuthRoute from "./components/authroute/authroute";
+import BossInfo from "./container/bossinfo/bossinfo";
+import GeniusInfo from "./container/geniusinfo/geniusinfo";
 
 import "./static/fronts/iconfont.css";
 import "./static/css/main.css";
@@ -31,18 +33,17 @@ const store = createStore(reducers,compose(
     reduxDevTools
 ));
 
-function Boss(){
-    return <h2>BOSS页面</h2>
-}
-
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>{/* 登录验证组件 */}
-                <Route path='/boss' component={Boss}/>
-                <Route path='/login' component={Login}/>
-                <Route path='/register' component={Register}/>
+                <Switch>
+                    <Route path="/geniusInfo" component={GeniusInfo}/>
+                    <Route path="/bossinfo" component={BossInfo}/>
+                    <Route path='/login' component={Login}/>
+                    <Route path='/register' component={Register}/>
+                </Switch>
             </div>
         </BrowserRouter>
     </Provider>,

@@ -1,8 +1,12 @@
 import React,{Component} from "react";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { register } from "../../redux/user.redux";
 import { List, InputItem, WhiteSpace,Button,WingBlank,Radio,NavBar, Icon,Checkbox,Toast } from 'antd-mobile';
-import Logo from "../../components/logo/logo";
 
+@connect(state=>state.user,{
+    register
+})
 export default class Register extends Component {
     constructor(props){
         super(props);
@@ -52,7 +56,8 @@ export default class Register extends Component {
             Toast.fail("两次密码不一致");
             return false;
         }
-        console.log(this.state);
+
+        this.props.register(this.state.info)
     }
 
     render (){
@@ -61,7 +66,7 @@ export default class Register extends Component {
 
         return (
             <div>
-                {/* <Logo></Logo> */}
+                {this.props.redirect?<Redirect to={this.props.redirect}></Redirect>:null}
                 <NavBar
                     mode="dark"
                     icon={<Icon type="left"/>}
@@ -99,17 +104,17 @@ export default class Register extends Component {
 
                 <List renderHeader={() => '请选择职业'}>
                     <RadioItem 
-                        checked={this.state.info.type=="NIUREN"} 
+                        checked={this.state.info.type==="NIUREN"} 
                         onChange={v=>this.changeHandle("type","NIUREN")}
                     >牛人</RadioItem>
                     <RadioItem 
-                        checked={this.state.info.type=="BOSS"}  
+                        checked={this.state.info.type==="BOSS"}  
                         onChange={v=>this.changeHandle("type","BOSS")}
                     >BOSS</RadioItem>
                 </List>
                 <WhiteSpace/>
                 <CheckboxItem key="disabled" onChange={v=>this.xyHandle(v)} data-seed="logId" defaultChecked multipleLine>
-                    您是否同意服务<Link to="">《条款协议》</Link>
+                    请勾选用户<Link to="">《条款协议》</Link>
                 </CheckboxItem>
                 <WhiteSpace/>
                 <WhiteSpace/>

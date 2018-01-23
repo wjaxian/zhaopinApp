@@ -1,8 +1,13 @@
 import React,{Component} from "react";
+import {connect} from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { info } from "../../redux/user.redux";
 
 @withRouter
+@connect(null,{
+    info
+})
 export default class AuthRoute extends Component{
     componentDidMount(){
         //需忽略验证的路由
@@ -14,10 +19,9 @@ export default class AuthRoute extends Component{
 
         //获取用户信息
         axios.get("/user/info").then(res=>{
-            if(res.code==1){
-                console.log("有登录信息");
+            if(res.code===1){
+                this.props.info(res.data);
             }else{
-                console.log("没有登录信息");
                 this.props.history.push("/login")
             }
         }).catch(err=>{

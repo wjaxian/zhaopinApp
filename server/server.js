@@ -1,8 +1,13 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const userRoute = require("./userRoute");
 const app = express();
 
-// 获取用户信息接口
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+// 用户接口模块
 app.use("/user",userRoute);
 
 // app.get("/",function(req,res){

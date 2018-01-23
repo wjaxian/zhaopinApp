@@ -12,3 +12,10 @@
     text-align: left;
 }
 
+.Info .am-list-item .am-input-control input,.am-textarea-control textarea{
+    text-align: right;
+}
+
+.am-grid .am-flexbox .am-flexbox-item .am-grid-item-content .am-grid-item-inner-content{
+    overflow: hidden;
+}
