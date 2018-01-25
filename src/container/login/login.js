@@ -13,7 +13,7 @@ export default class Login extends Component {
         super(props)
 
         this.state = {
-            username:"",
+            tel:"",
             password:""
         }
     }
@@ -30,7 +30,7 @@ export default class Login extends Component {
     }
 
     clickHandle(){
-        if(!this.state.username){
+        if(!this.state.tel){
             Toast.fail("请输入用户名")
             return false;
         }else if(!this.state.password){
@@ -52,7 +52,7 @@ export default class Login extends Component {
                             clear
                             placeholder="请输入用户名"
                             ref={el => this.autoFocusInst = el}
-                            onChange={v=>this.changeHandle("username",v)}
+                            onChange={v=>this.changeHandle("tel",v)}
                         >
                             <i className="iconfont icon-yonghu c-blue"></i>
                         </InputItem>

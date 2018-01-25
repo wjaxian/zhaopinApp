@@ -22,6 +22,7 @@ import Register from "./container/register/register";
 import AuthRoute from "./components/authroute/authroute";
 import BossInfo from "./container/bossinfo/bossinfo";
 import GeniusInfo from "./container/geniusinfo/geniusinfo";
+import Home from "./container/home/home";
 
 import "./static/fronts/iconfont.css";
 import "./static/css/main.css";
@@ -43,6 +44,7 @@ ReactDOM.render(
                     <Route path="/bossinfo" component={BossInfo}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>
+                    <Route component={Home}/>
                 </Switch>
             </div>
         </BrowserRouter>

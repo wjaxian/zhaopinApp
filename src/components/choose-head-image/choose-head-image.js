@@ -1,11 +1,16 @@
 import React,{Component} from "react";
+import PropTypes from "prop-types";
 import { Grid,WhiteSpace } from "antd-mobile";
 
 export default class ChooseHeadImage extends Component{
+    static propTypes = {
+        clickHandle: PropTypes.func.isRequired
+    }
+
     constructor(props){
         super(props)
         this.state = {
-            icon: require("./images/boy.png"),
+            icon: "",
             isShow:'none'
         }
     }
@@ -23,12 +28,12 @@ export default class ChooseHeadImage extends Component{
                 
                 <WhiteSpace/>
                 <WhiteSpace/>
-                <div onClick={e=>{
+                <div>
+                    <div style={{width:56,height:56,display:"inline-block",border:"1px solid #ddd"}}  onClick={e=>{
                     this.setState({
                         isShow:"block"
                     })
                 }}>
-                    <div style={{width:56,height:56,display:"inline-block",border:"1px solid #ddd"}}>
                         <img src={this.state.icon} alt="" style={{width:"80%",height:"80%",marginTop:"10%"}}/>
                     </div>
                     <WhiteSpace/>

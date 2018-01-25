@@ -9,11 +9,13 @@ mongoose.connection.on("connected",function(){
 const models = {
     //user表
     user: {
-        "username":{"type":String,"require":true},//用户名
+        "tel":{"type":Number,"require":true},//手机号
         "password":{"type":String,"require":true},//密码
+        "username":{"type":String},//用户名
         "type":{"type":String,"require":true},//职业类型
+        "address":{"type":String},
         "sex":{"type":String},
-        "tel":{"type":Number},
+        "age":{"type":Number},
         "avatar":{"type": String},//头像
         "desc":{"type":String},//个人简介或者职位介绍
         "title":{"type":String},//职位名称
@@ -22,6 +24,12 @@ const models = {
         //Boss 补充信息
         "money":{"type":String},//职位薪水
         "company":{"type":String}//公司
+    },
+    //获取验证码表
+    yzm: {
+        "tel":{"type":Number,require:true},
+        "yzm":{"type":String,require:true},
+        // "time":{"type":Number}
     }
 }
 

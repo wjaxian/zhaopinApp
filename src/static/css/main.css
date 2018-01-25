@@ -1,3 +1,6 @@
+html{
+    height: 100%;
+}
 .c-blue{
     color:#108EE9;
 }
@@ -18,4 +21,28 @@
 
 .am-grid .am-flexbox .am-flexbox-item .am-grid-item-content .am-grid-item-inner-content{
     overflow: hidden;
+}
+.am-navbar{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 100;
+}
+.am-tab-bar{
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position:fixed;
+    height: 50px;
+    z-index: 100;
+}
+.mt-45{
+    margin-top: 45px;
+}
+.mb-50{margin-bottom: 50px;}
+
+.over-2{
+    overflow : hidden;
+    height: 35px;
 }

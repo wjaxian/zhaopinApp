@@ -2,36 +2,25 @@ import axios from "axios";
 import {Toast} from "antd-mobile";
 import {getRedirectPath} from "../util";
 
-const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 const ERROR = "ERROR";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const UPDATE_INFO_SUCCESS = "UPDATE_INFO_SUCCESS";
 const GETINFO = 'GETINFO';
 
 const initState = {
     redirect:"",
-    isLogin:"",
     msg:"",
-    username:"",
+    tel:"",
     type:""
 }
 
 //reducer
 export function user(state=initState,action){
     switch(action.type){
-        case REGISTER_SUCCESS:
+        case UPDATE_INFO_SUCCESS:
             return {
                 ...state,
                 ...action.data,
                 redirect:getRedirectPath(action.data),
-                isLogin: true,
-                msg: ""
-            }
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                ...action.data,
-                redirect:getRedirectPath(action.data),
-                isLogin: true,
                 msg: ""
             }
         case GETINFO:
@@ -42,28 +31,10 @@ export function user(state=initState,action){
         case ERROR:
             return {
                 ...state,
-                msg:action.msg,
-                isLogin: false
+                msg:action.msg
             }
         default:
             return state
-    }
-}
-
-
-//register_success action
-export function register_success(data){
-    return {
-        data,
-        type: REGISTER_SUCCESS
-    }
-}
-
-//login_success action
-export function loginSuccess(data){
-    return {
-        data,
-        type: LOGIN_SUCCESS
     }
 }
 
@@ -83,13 +54,30 @@ export function handle_error(msg){
     }
 }
 
-//login action
-export function login_handle({username,password}){
+//get yanzhengma
+export function getYzm({tel,callback}){
     return dispatch=>{
-        axios.post("/user/login",{username,password}).then(res=>{
+        axios.post("/user/yzm",{tel}).then(res=>{
             if(res.code===1){
                 Toast.success(res.msg, 2, ()=>{
-                    dispatch(loginSuccess(res.data));
+                    callback(res.yzm,res.time);
+                });
+            }else{
+                Toast.fail(res.msg);
+            }
+        }).catch(err=>{
+            Toast.fail("请求出错");
+        })
+    }
+}
+
+//login action
+export function login_handle({tel,password}){
+    return dispatch=>{
+        axios.post("/user/login",{tel,password}).then(res=>{
+            if(res.code===1){
+                Toast.success(res.msg, 2, ()=>{
+                    dispatch(updateInfaSuccess(res.data));
                 });
             }else{
                 Toast.fail(res.msg,2,()=>{
@@ -105,12 +93,41 @@ export function login_handle({username,password}){
 }
 
 //Register Action
-export function register({username,password,type}){
+export function register({tel,password,type,yzm}){
     return dispatch => {
-        axios.post("/user/register",{username,password,type}).then(res=>{
+        axios.post("/user/register",{tel,password,type,yzm}).then(res=>{
             if(res.code===1){
                 Toast.success(res.msg, 2, ()=>{
-                    dispatch(register_success({username,password,type}));
+                    dispatch(updateInfaSuccess({tel,type}));
+                });
+            }else{
+                Toast.fail(res.msg,2,()=>{
+                    dispatch(handle_error(res.msg))
+                });
+            }
+        }).catch(err=>{
+            Toast.fail("请求出错",2,()=>{
+                dispatch(handle_error("请求出错"))
+            });
+        })
+    }
+}
+
+//UPDATE_INFO_SUCCESS action
+export function updateInfaSuccess(data){
+    return {
+        data,
+        type:UPDATE_INFO_SUCCESS
+    }
+}
+
+//updateInfo action
+export function updateInfo(data){
+    return dispatch=>{
+        axios.post("/user/updateInfo",data).then(res=>{
+            if(res.code===1){
+                Toast.success(res.msg, 2, ()=>{
+                    dispatch(updateInfaSuccess(data))
                 });
             }else{
                 Toast.fail(res.msg,2,()=>{
