@@ -1,7 +1,6 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import { NavBar,InputItem,TextareaItem,Button,WingBlank,WhiteSpace,Picker,List,Toast } from "antd-mobile";
+import { NavBar,InputItem,TextareaItem,Button,WingBlank,WhiteSpace,Picker,List,Toast,Icon } from "antd-mobile";
 import ChooseHeadImage from "../../components/choose-head-image/choose-head-image";
 import {updateInfo} from "../../redux/user.redux";
 
@@ -34,6 +33,19 @@ export default class GeniusInfo extends Component{
         }
     }
 
+    componentWillMount(){
+        this.setState({
+            sex:this.props.sex||["男"],
+            username:this.props.username,
+            age:this.props.age,
+            avatar:this.props.avatar,
+            title:this.props.title,
+            money:this.props.money,
+            desc:this.props.desc,
+            type:"NIUREN"
+        })
+    }
+
     changeHandle(key,v){
         this.setState({
             ...this.state,
@@ -50,23 +62,37 @@ export default class GeniusInfo extends Component{
             }
         }
 
-        this.props.updateInfo(this.state);
+        this.props.updateInfo(this.state,()=>{
+            this.props.history.push("/genius")
+        });
     }
 
     render(){
-        let redirect = this.props.redirect;
-        let path = this.props.location.pathname;
 
         return (
             <div className="Info mt-45">
-                {redirect&&redirect!==path?<Redirect to={redirect}></Redirect>:null}
-                <NavBar mode="dark">牛人-完善信息</NavBar>
-                <ChooseHeadImage clickHandle={t=>{
-                    this.setState({
-                        ...this.state,
-                        avatar: t.icon
-                    })
-                }}></ChooseHeadImage>
+                {
+                    this.props.username?(
+                        <NavBar 
+                            mode="dark"
+                            icon={<Icon type="left"/>}
+                            onLeftClick={() => this.props.history.push("/user")}
+                        >编辑信息</NavBar>
+                    ):(
+                        <NavBar 
+                            mode="dark"
+                        >完善信息</NavBar>
+                    )
+                }
+                <ChooseHeadImage 
+                    clickHandle={t=>{
+                        this.setState({
+                            ...this.state,
+                            avatar: t.icon
+                        })
+                    }}
+                    icon_path={this.state.avatar}
+                ></ChooseHeadImage>
                 <WhiteSpace/>
                 <List style={{ backgroundColor: 'white' }} className="picker-list">
                 <InputItem 
@@ -74,12 +100,14 @@ export default class GeniusInfo extends Component{
                         placeholder="请输入您的姓名" 
                         className="ta-right"
                         onChange={v => this.changeHandle("username",v)}
+                        value={this.state.username}
                     >姓名</InputItem>
                     <InputItem 
                         type="number" 
                         placeholder="请输入您的年龄" 
                         className="ta-right"
                         onChange={v => this.changeHandle("age",v)}
+                        value={this.state.age}
                     >年龄</InputItem>
                     <Picker
                         title="选择性别"
@@ -95,11 +123,13 @@ export default class GeniusInfo extends Component{
                         type="text" 
                         placeholder="请输入求职职位"
                         onChange={v => this.changeHandle("title",v)}
+                        value={this.state.title}
                     >职位</InputItem>
                     <InputItem 
                         type="text" 
                         placeholder="请输入意向薪资"
                         onChange={v=> this.changeHandle("money",v)}
+                        value={this.state.money}
                     >意向薪资</InputItem>
                     <TextareaItem
                         title="个人简介" 
@@ -107,6 +137,7 @@ export default class GeniusInfo extends Component{
                         rows={3} 
                         autoHeight
                         onChange={v => this.changeHandle("desc",v)}
+                        value={this.state.desc}
                     ></TextareaItem>
                 </List>
                 <WhiteSpace/>

@@ -15,6 +15,15 @@ export default class ChooseHeadImage extends Component{
         }
     }
 
+    componentWillMount(){
+        if(this.props.icon_path){
+            this.setState({
+                ...this.state,
+                icon: this.props.icon_path
+            })
+        }
+    }
+
     render(){
         const headData = "boy,girl,bull,chick,crab,hedgehog,hippopotamus,koala,lemur,man,pig,tiger,whale,woman,zebra".split(",").map(s=>{
             return {

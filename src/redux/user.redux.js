@@ -5,6 +5,7 @@ import {getRedirectPath} from "../util";
 const ERROR = "ERROR";
 const UPDATE_INFO_SUCCESS = "UPDATE_INFO_SUCCESS";
 const GETINFO = 'GETINFO';
+const LOGOUT = "LOGOUT";
 
 const initState = {
     redirect:"",
@@ -27,6 +28,11 @@ export function user(state=initState,action){
             return {
                 ...state,
                 ...action.data
+            }
+        case LOGOUT:
+            return {
+                ...initState,
+                redirect: "/login"
             }
         case ERROR:
             return {
@@ -122,12 +128,13 @@ export function updateInfaSuccess(data){
 }
 
 //updateInfo action
-export function updateInfo(data){
+export function updateInfo(data,callback){
     return dispatch=>{
         axios.post("/user/updateInfo",data).then(res=>{
             if(res.code===1){
                 Toast.success(res.msg, 2, ()=>{
                     dispatch(updateInfaSuccess(data))
+                    callback&&callback();
                 });
             }else{
                 Toast.fail(res.msg,2,()=>{
@@ -139,5 +146,12 @@ export function updateInfo(data){
                 dispatch(handle_error("请求出错"))
             });
         })
+    }
+}
+
+//logout action
+export function logout(){
+    return {
+        type:  LOGOUT
     }
 }

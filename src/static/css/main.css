@@ -46,3 +46,17 @@ html{
     overflow : hidden;
     height: 35px;
 }
+
+/* html:not([data-scale]) .am-result::after{
+    height: 0;
+} */
+.am-result-pic{
+    border-radius: 50%;border:1px solid #ddd;
+    overflow: hidden;
+    padding: 5px;
+}
+
+
+.fs-20{font-size: 20px;}
+
+.c-888{color:#ccc;}

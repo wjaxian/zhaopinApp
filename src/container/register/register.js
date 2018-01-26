@@ -5,7 +5,6 @@ import { register,getYzm } from "../../redux/user.redux";
 import { List, InputItem, WhiteSpace,Button,WingBlank,Radio,NavBar, Icon,Checkbox,Toast,Modal } from 'antd-mobile';
 import {yzTel} from "../../util";
 
-
 @connect(state=>state.user,{
     register,getYzm
 })

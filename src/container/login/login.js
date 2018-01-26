@@ -42,9 +42,10 @@ export default class Login extends Component {
     }
 
     render (){
+        
         return (
             <div>
-                {this.props.redirect?<Redirect to={this.props.redirect}></Redirect>:null}
+                {this.props.redirect&&this.props.match.path!==this.props.redirect?<Redirect to={this.props.redirect}></Redirect>:null}
                 <Logo></Logo>
                 <WingBlank>
                     <List renderHeader={() => ''}>
