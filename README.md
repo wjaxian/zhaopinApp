@@ -1,14 +1,14 @@
-#全职招聘-WEBAPP
+# 全职招聘-WEBAPP
 
-##项目介绍
+## 项目介绍
 
   项目是一个招聘类webapp，后端使用express，mongodb完成接口开发；前端使用react全家桶及系列中间件处理数据，UI主要使用Antd-Mobile。
 
   项目主体功能：注册->登录-完善信息->牛人与BOss列表->聊天列表->个人中心
 
-##使用技术栈
+## 使用技术栈
 
-  ###前端
+  ### 前端
 
       creact-react-app
       react16
@@ -21,7 +21,7 @@
       browser-cookies
       antd-mobile
 
-  ###后端  
+  ### 后端  
 
       node
       express
@@ -31,7 +31,7 @@
       body-parser
 
 
-##项目目录
+## 项目目录
 
         .
         ├── README.md
@@ -55,13 +55,13 @@
         │   └── reducer.js       // 所有reducer合并
 
 
-##运行项目
+## 运行项目
 
-  ###环境依赖
+  ### 环境依赖
 
       项目运行前须要安装NodeJs&MongoDB，Mongo端口为27017，express服务器端口9093，访问地址为：localhost
 
-  ###运行项目
+  ### 运行项目
       
       首先需要使用命令行工具CD到根目录，按顺序执行如下命令
 
