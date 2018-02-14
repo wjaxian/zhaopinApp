@@ -35,7 +35,7 @@ export default class GeniusInfo extends Component{
 
     componentWillMount(){
         this.setState({
-            sex:this.props.sex||["男"],
+            sex:[this.props.sex]||["男"],
             username:this.props.username,
             age:this.props.age,
             avatar:this.props.avatar,

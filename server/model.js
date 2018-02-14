@@ -30,6 +30,15 @@ const models = {
         "tel":{"type":Number,require:true},
         "yzm":{"type":String,require:true},
         // "time":{"type":Number}
+    },
+    //聊天表
+    chat:{
+        "chatId":{"type":String,"require":true},//当前聊天的id
+        "from":{"type":String,"require":true},//自身
+        "to":{"type":String,"require":true},//发送的目标
+        "content":{"type":String,"require":true,"default":""},//发送内容
+        "read":{"type":Boolean,"default":false},//是否查阅
+        "create_time":{"type":Number,"default":new Date().getTime()}//发送时间
     }
 }
 

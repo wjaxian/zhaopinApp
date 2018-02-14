@@ -8,15 +8,20 @@ const _filter = {password:0,__v:0};
 
 const User = models.getModel("user");//获取用户表
 const Yzm = models.getModel("yzm");//获取验证码表
+const Chat = models.getModel("chat");//聊天表
 
 //清空数据表接口
 Router.get("/remove",function(req,res){
     //从user表清除所有的user
-    User.remove({},function(err,doc){
-        return res.json(doc)
-    })
+    // User.remove({},function(err,doc){
+    //     return res.json(doc)
+    // })
 
-    Yzm.remove({},function(err,doc){
+    // Yzm.remove({},function(err,doc){
+    //     return res.json(doc)
+    // })
+
+    Chat.remove({},function(err,doc){
         return res.json(doc)
     })
 })
@@ -221,6 +226,60 @@ Router.post("/list",function(req,res){
         if(err){
             return res.json({code:0,msg:"后端出错"})
         }
+    })
+})
+
+//读取聊天信息
+Router.post("/readMsg",function(req,res){
+    const userId = req.cookies.userId;
+    const {from} = req.body;
+    console.log(userId,from)
+    Chat.update({from,to:userId},{"$set":{read:true}},{"multi":true},function(doc,err){
+        console.log(doc)
+        if(!err){
+           return res.json({code:1,msg:"读取成功",num:doc.nModified})
+        }
+
+        return res.json({code:0,msg:"读取失败"})
+    })
+})
+
+//获取聊天列表
+Router.post("/getChatList",function(req,res){
+    const { userId } = req.cookies;
+
+    User.find({},function(err,doc){
+        let avatar = [];
+        
+        doc.forEach(function(v){
+            avatar.push({
+                [v._id]:v.avatar,
+                title:v.username,
+                id:v._id
+            });
+        })
+
+        Chat.find({"$or":[{"from":userId},{to:userId}]},function(err,doc){
+            if(doc){
+                res.json({
+                    code:1,
+                    msg:"获取成功",
+                    data:{doc,avatar}
+                })
+            }else{
+                res.json({
+                    code:0,
+                    msg:"获取失败"
+                })
+            }
+    
+            if(err){
+                res.json({
+                    code:0,
+                    msg:"后端出错"
+                })
+            }
+        })
     })
 })
 

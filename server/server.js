@@ -4,6 +4,27 @@ const cookieParser = require("cookie-parser");
 const userRoute = require("./userRoute");
 const app = express();
 
+//express & socket.io关联
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
+const models = require("./model");
+const Chat = models.getModel("chat");//聊天表
+
+io.on("connection",function(socket){
+    //收到前端发送过来的消息
+    socket.on("sendMsg",function(data){
+        const {from,to,content} = data;
+        const chatId = [from,to].sort().join("_");
+        Chat.create({chatId,...data},function(err,doc){
+            if(doc){
+                io.emit("noticeMsg",doc)
+            }
+        })
+        //发送到全局
+        // io.emit("noticeMsg",data)
+    })
+})
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -14,7 +35,7 @@ app.use("/user",userRoute);
 //     res.send("wellcom to express!")
 // });
 
-app.listen("9093",function(){
+server.listen("9093",function(){
     console.log("open Browser http://localhost:9093");
 });
 

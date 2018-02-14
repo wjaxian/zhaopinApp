@@ -11,6 +11,10 @@ export default class UserCard extends React.Component{
         userLists: PropTypes.array.isRequired
     }
 
+    clickHandle(v){
+        this.props.history.push(`/chat/${v._id}/${v.username}`)
+    }
+
     render(){
         const data = this.props.userLists;
 
@@ -19,7 +23,7 @@ export default class UserCard extends React.Component{
                 {
                     data.map(v=>{
                         return (
-                            <div key={v._id}>
+                            <div key={v._id} onClick={()=>{this.clickHandle(v)}}>
                                 <Card>
                                     <Card.Header
                                         title={v.username}

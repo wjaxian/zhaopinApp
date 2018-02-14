@@ -3,14 +3,24 @@ import { connect } from "react-redux";
 import { NavBar } from 'antd-mobile';
 import {Route,Switch} from "react-router-dom";
 import Navbar from "../../components/navbar/navbar";
+import {getChatList,recvMsg} from "../../redux/chat.redux";
 
 import Boss from "./boss/boss";
 import Genius from "./genius/genius";
-import Msg from "./msg/msg";
+import ChatList from "./chat/chat-list";
 import User from "./user/user";
 
-@connect(state=>state.user)
+@connect(state=>state,{
+    getChatList,recvMsg
+})
 export default class Home extends React.Component{
+    componentDidMount(){
+        
+        if(!this.props.chat.chatMsg.length){
+            this.props.getChatList();
+            this.props.recvMsg();
+        }
+    }
 
     render(){
         const navList = [
@@ -20,7 +30,7 @@ export default class Home extends React.Component{
                 icon:"job",
                 text:"BOSS",
                 component: Genius,
-                hide: this.props.type==='BOSS'
+                hide: this.props.user.type==='BOSS'
             },
             {
                 path:"/boss",
@@ -28,14 +38,14 @@ export default class Home extends React.Component{
                 icon:"boss",
                 text:"牛人",
                 component: Boss,
-                hide: this.props.type==='NIUREN'
+                hide: this.props.user.type==='NIUREN'
             },
             {
-                path:"/msg",
+                path:"/chat",
                 title:"消息列表",
                 icon:"m",
                 text:"消息",
-                component: Msg
+                component: ChatList
             },
             {
                 path:"/user",
