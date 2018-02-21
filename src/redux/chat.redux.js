@@ -79,7 +79,7 @@ export function readMsg(from){
         axios.post("user/readMsg",{
             from
         }).then(res=>{
-            if(res.code==1){
+            if(res.code===1){
                 let userId = getState().user._id;
                 dispatch(msgRead({userId,from,num:res.num}))
             }
