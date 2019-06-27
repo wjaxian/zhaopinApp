@@ -8,7 +8,7 @@ import Logo from "../../components/logo/logo";
 @connect(state=>state.user,{
     login_handle
 })
-export default class Login extends Component {
+class Login extends Component {
     constructor(props){
         super(props)
 
@@ -83,3 +83,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default Login

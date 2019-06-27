@@ -9,7 +9,7 @@ import {dateFtt} from "../../util";
 @connect(state=>state,{
     sendMsg,getChatList,readMsg,recvMsg
 })
-export default class ChatDetails extends React.Component{
+class ChatDetails extends React.Component{
     constructor(props){
         super(props);
 
@@ -164,3 +164,5 @@ export default class ChatDetails extends React.Component{
         )
     }
 }
+
+export default ChatDetails

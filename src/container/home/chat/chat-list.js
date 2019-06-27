@@ -5,7 +5,7 @@ import {dateFtt} from "../../../util";
 import {Link} from "react-router-dom";
 
 @connect(state=>state)
-export default class ChatList extends React.Component{
+class ChatList extends React.Component{
 
     render(){
         // console.log(this.props.chat)
@@ -66,3 +66,5 @@ export default class ChatList extends React.Component{
         )
     }
 }
+
+export default ChatList

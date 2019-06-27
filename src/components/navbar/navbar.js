@@ -6,8 +6,8 @@ import {connect} from "react-redux";
 
 @withRouter
 @connect(state=>state.chat)
-export default class Navbar extends React.Component{
-    static proptypes = {
+class Navbar extends React.Component{
+    proptypes = {
         data: PropTypes.array.isReuired
     }
 
@@ -36,3 +36,5 @@ export default class Navbar extends React.Component{
         )
     }
 }
+
+export default Navbar

@@ -18,7 +18,7 @@ const seasons = [
 @connect(state=>state.user,{
     updateInfo
 })
-export default class GeniusInfo extends Component{
+class GeniusInfo extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -151,3 +151,5 @@ export default class GeniusInfo extends Component{
         )
     }
 }
+
+export default GeniusInfo

@@ -6,7 +6,7 @@ import UserCard from "../../../components/user-card/user-card";
 @connect(state=>state,{
     actionUserList
 })
-export default class Boss extends React.Component{
+class Boss extends React.Component{
 
     componentDidMount(){
         this.props.actionUserList("NIUREN");
@@ -22,3 +22,5 @@ export default class Boss extends React.Component{
         )
     }
 }
+
+export default Boss

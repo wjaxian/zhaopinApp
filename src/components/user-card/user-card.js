@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 @withRouter
 @connect(state=>state.user)
-export default class UserCard extends React.Component{
+class UserCard extends React.Component{
     static propTypes = {
         userLists: PropTypes.array.isRequired
     }
@@ -58,3 +58,5 @@ export default class UserCard extends React.Component{
         )
     }
 }
+
+export default UserCard

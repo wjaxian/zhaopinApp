@@ -8,7 +8,7 @@ import { logout } from "../../../redux/user.redux";
 @connect(state=>state.user,{
     logout
 })
-export default class User extends React.Component{
+class User extends React.Component{
 
     logout(){
         Modal.alert("提示","您确定要退出登录吗？",[
@@ -80,3 +80,5 @@ export default class User extends React.Component{
         )
     }
 }
+
+export default User

@@ -13,7 +13,7 @@ import User from "./user/user";
 @connect(state=>state,{
     getChatList,recvMsg
 })
-export default class Home extends React.Component{
+class Home extends React.Component{
     componentDidMount(){
         
         if(!this.props.chat.chatMsg.length){
@@ -56,14 +56,13 @@ export default class Home extends React.Component{
             }
         ]
 
-        let pathname = this.props.location.pathname;
+        let pathname = this.props.location.pathname,
+            navItem = navList.find(v => v.path === pathname);
 
         return (
             <div>
-                <NavBar
-                    mode="dark"
-                >
-                    {navList.find(v=>v.path===pathname).title}
+                <NavBar mode="dark">
+                    {navItem && navItem.title}
                 </NavBar>
 
                 <div className="mt-45 mb-50">
@@ -77,3 +76,5 @@ export default class Home extends React.Component{
         )
     }
 }
+
+export default Home

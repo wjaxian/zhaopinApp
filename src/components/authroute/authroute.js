@@ -8,7 +8,7 @@ import { info } from "../../redux/user.redux";
 @connect(null,{
     info
 })
-export default class AuthRoute extends Component{
+class AuthRoute extends Component{
     componentDidMount(){
         //需忽略验证的路由
         const pathName = ["/login","/register"];
@@ -33,3 +33,5 @@ export default class AuthRoute extends Component{
         return null;
     }
 }
+
+export default AuthRoute
