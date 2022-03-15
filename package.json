@@ -43,7 +43,7 @@
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
     "lodash": "^4.17.14",
-    "lodash-es": "^4.17.14",
+    "lodash-es": "^4.17.21",
     "lodash.template": "^4.5.0",
     "mem": "^5.1.1",
     "mini-css-extract-plugin": "0.5.0",
