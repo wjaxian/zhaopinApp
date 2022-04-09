@@ -47,7 +47,7 @@
     "lodash.template": "^4.5.0",
     "mem": "^5.1.1",
     "mini-css-extract-plugin": "0.5.0",
-    "moment": "^2.20.1",
+    "moment": "^2.29.2",
     "mongoose": "^4.13.9",
     "object-assign": "4.1.1",
     "optimize-css-assets-webpack-plugin": "5.0.1",
